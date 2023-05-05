@@ -1,0 +1,338 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="UserRegistrationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="GenderId" />
+          </Key>
+          <Property Name="GenderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Gender" Type="varchar" MaxLength="75" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hobbies">
+          <Key>
+            <PropertyRef Name="HobbiesId" />
+          </Key>
+          <Property Name="HobbiesId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Hobbies" Type="varchar" MaxLength="75" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonInfo">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mobile" Type="bigint" Nullable="false" />
+          <Property Name="Gender" Type="int" />
+          <Property Name="Hobbies" Type="int" />
+        </EntityType>
+        <EntityType Name="PersonsInfo">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mobile" Type="bigint" Nullable="false" />
+          <Property Name="Gender" Type="int" />
+          <Property Name="Hobbies" Type="int" />
+        </EntityType>
+        <Association Name="FK__PersonInf__Gende__619B8048">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="PersonInfo" Type="Self.PersonInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="GenderId" />
+            </Principal>
+            <Dependent Role="PersonInfo">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonInf__Hobbi__628FA481">
+          <End Role="Hobbies" Type="Self.Hobbies" Multiplicity="0..1" />
+          <End Role="PersonInfo" Type="Self.PersonInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hobbies">
+              <PropertyRef Name="HobbiesId" />
+            </Principal>
+            <Dependent Role="PersonInfo">
+              <PropertyRef Name="Hobbies" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonsIn__Gende__4E88ABD4">
+          <End Role="PersonsInfo" Type="Self.PersonsInfo" Multiplicity="0..1" />
+          <End Role="PersonsInfo1" Type="Self.PersonsInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonsInfo">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PersonsInfo1">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonsIn__Hobbi__4F7CD00D">
+          <End Role="PersonsInfo" Type="Self.PersonsInfo" Multiplicity="0..1" />
+          <End Role="PersonsInfo1" Type="Self.PersonsInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonsInfo">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PersonsInfo1">
+              <PropertyRef Name="Hobbies" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="spGetAllInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="UserRegistrationModelStoreContainer">
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hobbies" EntityType="Self.Hobbies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonInfo" EntityType="Self.PersonInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonsInfo" EntityType="Self.PersonsInfo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__PersonInf__Gende__619B8048" Association="Self.FK__PersonInf__Gende__619B8048">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="PersonInfo" EntitySet="PersonInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonInf__Hobbi__628FA481" Association="Self.FK__PersonInf__Hobbi__628FA481">
+            <End Role="Hobbies" EntitySet="Hobbies" />
+            <End Role="PersonInfo" EntitySet="PersonInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonsIn__Gende__4E88ABD4" Association="Self.FK__PersonsIn__Gende__4E88ABD4">
+            <End Role="PersonsInfo" EntitySet="PersonsInfo" />
+            <End Role="PersonsInfo1" EntitySet="PersonsInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonsIn__Hobbi__4F7CD00D" Association="Self.FK__PersonsIn__Hobbi__4F7CD00D">
+            <End Role="PersonsInfo" EntitySet="PersonsInfo" />
+            <End Role="PersonsInfo1" EntitySet="PersonsInfo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UserRegistrationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="GenderId" />
+          </Key>
+          <Property Name="GenderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Gender1" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PersonInfoes" Relationship="Self.FK__PersonInf__Gende__619B8048" FromRole="Gender" ToRole="PersonInfo" />
+        </EntityType>
+        <EntityType Name="Hobby">
+          <Key>
+            <PropertyRef Name="HobbiesId" />
+          </Key>
+          <Property Name="HobbiesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Hobbies" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PersonInfoes" Relationship="Self.FK__PersonInf__Hobbi__628FA481" FromRole="Hobbies" ToRole="PersonInfo" />
+        </EntityType>
+        <EntityType Name="PersonInfo">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mobile" Type="Int64" Nullable="false" />
+          <Property Name="Gender" Type="Int32" />
+          <Property Name="Hobbies" Type="Int32" />
+          <NavigationProperty Name="Gender1" Relationship="Self.FK__PersonInf__Gende__619B8048" FromRole="PersonInfo" ToRole="Gender" />
+          <NavigationProperty Name="Hobby" Relationship="Self.FK__PersonInf__Hobbi__628FA481" FromRole="PersonInfo" ToRole="Hobbies" />
+        </EntityType>
+        <EntityType Name="PersonsInfo">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mobile" Type="Int64" Nullable="false" />
+          <Property Name="Gender" Type="Int32" />
+          <Property Name="Hobbies" Type="Int32" />
+          <NavigationProperty Name="PersonsInfo1" Relationship="Self.FK__PersonsIn__Gende__4E88ABD4" FromRole="PersonsInfo" ToRole="PersonsInfo1" />
+          <NavigationProperty Name="PersonsInfo2" Relationship="Self.FK__PersonsIn__Gende__4E88ABD4" FromRole="PersonsInfo1" ToRole="PersonsInfo" />
+          <NavigationProperty Name="PersonsInfo11" Relationship="Self.FK__PersonsIn__Hobbi__4F7CD00D" FromRole="PersonsInfo" ToRole="PersonsInfo1" />
+          <NavigationProperty Name="PersonsInfo3" Relationship="Self.FK__PersonsIn__Hobbi__4F7CD00D" FromRole="PersonsInfo1" ToRole="PersonsInfo" />
+        </EntityType>
+        <Association Name="FK__PersonInf__Gende__619B8048">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="PersonInfo" Type="Self.PersonInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="GenderId" />
+            </Principal>
+            <Dependent Role="PersonInfo">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonInf__Hobbi__628FA481">
+          <End Role="Hobbies" Type="Self.Hobby" Multiplicity="0..1" />
+          <End Role="PersonInfo" Type="Self.PersonInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hobbies">
+              <PropertyRef Name="HobbiesId" />
+            </Principal>
+            <Dependent Role="PersonInfo">
+              <PropertyRef Name="Hobbies" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonsIn__Gende__4E88ABD4">
+          <End Role="PersonsInfo" Type="Self.PersonsInfo" Multiplicity="0..1" />
+          <End Role="PersonsInfo1" Type="Self.PersonsInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonsInfo">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PersonsInfo1">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonsIn__Hobbi__4F7CD00D">
+          <End Role="PersonsInfo" Type="Self.PersonsInfo" Multiplicity="0..1" />
+          <End Role="PersonsInfo1" Type="Self.PersonsInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonsInfo">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PersonsInfo1">
+              <PropertyRef Name="Hobbies" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UserRegistrationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Genders" EntityType="Self.Gender" />
+          <EntitySet Name="Hobbies" EntityType="Self.Hobby" />
+          <EntitySet Name="PersonInfoes" EntityType="Self.PersonInfo" />
+          <EntitySet Name="PersonsInfoes" EntityType="Self.PersonsInfo" />
+          <AssociationSet Name="FK__PersonInf__Gende__619B8048" Association="Self.FK__PersonInf__Gende__619B8048">
+            <End Role="Gender" EntitySet="Genders" />
+            <End Role="PersonInfo" EntitySet="PersonInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonInf__Hobbi__628FA481" Association="Self.FK__PersonInf__Hobbi__628FA481">
+            <End Role="Hobbies" EntitySet="Hobbies" />
+            <End Role="PersonInfo" EntitySet="PersonInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonsIn__Gende__4E88ABD4" Association="Self.FK__PersonsIn__Gende__4E88ABD4">
+            <End Role="PersonsInfo" EntitySet="PersonsInfoes" />
+            <End Role="PersonsInfo1" EntitySet="PersonsInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonsIn__Hobbi__4F7CD00D" Association="Self.FK__PersonsIn__Hobbi__4F7CD00D">
+            <End Role="PersonsInfo" EntitySet="PersonsInfoes" />
+            <End Role="PersonsInfo1" EntitySet="PersonsInfoes" />
+          </AssociationSet>
+          <FunctionImport Name="spGetAllInfo" ReturnType="Collection(UserRegistrationModel.spGetAllInfo_Result)" />
+        </EntityContainer>
+        <ComplexType Name="spGetAllInfo_Result">
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="75" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="75" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="75" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="Mobile" Nullable="false" />
+          <Property Type="String" Name="Gender" Nullable="false" MaxLength="75" />
+          <Property Type="String" Name="Hobbies" Nullable="false" MaxLength="75" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UserRegistrationModelStoreContainer" CdmEntityContainer="UserRegistrationEntities">
+          <EntitySetMapping Name="Genders">
+            <EntityTypeMapping TypeName="UserRegistrationModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="Gender1" ColumnName="Gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hobbies">
+            <EntityTypeMapping TypeName="UserRegistrationModel.Hobby">
+              <MappingFragment StoreEntitySet="Hobbies">
+                <ScalarProperty Name="HobbiesId" ColumnName="HobbiesId" />
+                <ScalarProperty Name="Hobbies" ColumnName="Hobbies" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonInfoes">
+            <EntityTypeMapping TypeName="UserRegistrationModel.PersonInfo">
+              <MappingFragment StoreEntitySet="PersonInfo">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Hobbies" ColumnName="Hobbies" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonsInfoes">
+            <EntityTypeMapping TypeName="UserRegistrationModel.PersonsInfo">
+              <MappingFragment StoreEntitySet="PersonsInfo">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Hobbies" ColumnName="Hobbies" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spGetAllInfo" FunctionName="UserRegistrationModel.Store.spGetAllInfo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserRegistrationModel.spGetAllInfo_Result">
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Hobbies" ColumnName="Hobbies" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
